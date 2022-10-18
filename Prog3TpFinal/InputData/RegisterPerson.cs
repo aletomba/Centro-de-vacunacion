@@ -1,26 +1,23 @@
 ﻿using Prog3TpFinal.models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Prog3TpFinal.InputData
 {
     internal class RegisterPerson
     {
-        Person NewPerson = new Person();
+        Person NewPerson = new Person();  
 
         public Person PersonalData()
         {
             try
-            {         
+            {
 
                 Console.WriteLine("ingrese nombre");
                 NewPerson.Name = Console.ReadLine();
 
-                //Console.WriteLine("ingrese apellido");
-                //NuevaPersona.Apellido1 = Console.ReadLine();             
+
+                Console.WriteLine("ingrese apellido");
+                NewPerson.LastName = Console.ReadLine();              
 
                 //Console.WriteLine("ingrese nacionalidad");
                 //NuevaPersona.Nacionalidad1 = Console.ReadLine();
@@ -28,15 +25,17 @@ namespace Prog3TpFinal.InputData
                 //Console.WriteLine("ingrese fecha de nacimiento d/m/a \n");
                 //NuevaPersona.FechaDeNacimiento = DateTime.Parse(Console.ReadLine());
 
-               
+
             }
             catch (FormatException ex)
             {
                 Console.WriteLine($"error al ingresar datos, {ex.Message}");
+                Thread.Sleep(2000);
                 PersonalData();
             }
 
             this.InfoContact();
+
             return NewPerson;
 
         }
@@ -51,13 +50,17 @@ namespace Prog3TpFinal.InputData
             }
             catch (FormatException)
             {
-               Console.WriteLine($"debe ingresar un numero");
-                NumberDoc(); 
-                                   
+                Console.WriteLine($"debe ingresar un numero");
+                Thread.Sleep(2000);
+                Console.Clear();
+                NumberDoc();
+
             }
             catch (OverflowException)
             {
                 Console.WriteLine("Numero incorrecto");
+                Thread.Sleep(2000);
+                Console.Clear();
                 NumberDoc();
             }
             return NewPerson.Document;
@@ -81,17 +84,20 @@ namespace Prog3TpFinal.InputData
 
                 if (!NewPerson.validateTypeDni(estadoElegido))
                 {
+                    Console.Clear();
                     TypeDoc();
                 }
-
-                NewPerson.TypeSelect = estadoElegido.ToString();
-
-                
+                else 
+                {
+                    NewPerson.TypeSelect = estadoElegido.ToString();
+                }               
                 
             }
             catch (FormatException)
             {
-                Console.WriteLine("debe elegir una opcion");               
+                Console.WriteLine("debe elegir una opcion correcta");
+                Thread.Sleep(2000);
+                Console.Clear();
                 TypeDoc();
                
             }
@@ -116,9 +122,10 @@ namespace Prog3TpFinal.InputData
 
                 this.Direction();
             }
-            catch (Exception ex)
+            catch (FormatException ex)
             {
                 Console.WriteLine($"error al ingresar datos: {ex.Message}");
+                Thread.Sleep(2000);
             }
 
 
@@ -149,9 +156,10 @@ namespace Prog3TpFinal.InputData
 
 
             }
-            catch (Exception ex)
+            catch (FormatException ex)
             {
                 Console.WriteLine($"error al ingresar datos: {ex.Message}");
+                Thread.Sleep(2000);
             }
 
         }

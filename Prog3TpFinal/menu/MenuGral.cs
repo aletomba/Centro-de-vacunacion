@@ -10,7 +10,7 @@ namespace Prog3TpFinal.menu
     {
         private string titulo;
         private string[] array;
-
+    
         public MenuGral(string _titulo, string[] _array)
         {
             this.titulo = _titulo;
@@ -21,7 +21,7 @@ namespace Prog3TpFinal.menu
         public string[] Array { get => array; set => array = value; }
 
 
-        public virtual int MainMenu()
+        public int MainMenu()
         {
             int seleccionado = 0;
             ConsoleKey tecla = 0;

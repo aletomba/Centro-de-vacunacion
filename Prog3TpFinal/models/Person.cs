@@ -14,6 +14,8 @@ namespace Prog3TpFinal.models
 
         private Direction direction = new Direction();
 
+        private List<Vacine> VacineList = new List<Vacine>();
+
 
         public Person()
         {
@@ -25,7 +27,7 @@ namespace Prog3TpFinal.models
         [Required]
         public string? LastName { get; set; }
         [Required]
-        [MinLength(8)]
+        [MinLength(8)]        
         public int Document { get; set; }
         [Required]
         public string? Country { get; set; }        
@@ -35,20 +37,24 @@ namespace Prog3TpFinal.models
         [Required]
         public DateTime DateOfBirth { get; set; }
         [Required]
-        public List<Vacine>? VacineList { get; set; }
+        public InfoContact InfoContact { get => infoContact; set => infoContact = value; }
         [Required]
-        internal InfoContact InfoContact { get => infoContact; set => infoContact = value; }
-        [Required]
-        internal Direction Direction { get => direction; set => direction = value; }
+        public Direction Direction { get => direction; set => direction = value; }
+        public List<Vacine> VacineList1 { get => VacineList; set => VacineList = value; }
 
         public bool validateTypeDni(Person.TipeDocument dniSelected)
         {
-            if (((long)dniSelected)>3)
+            if (((long)dniSelected)>3 || ((long)dniSelected) <= 0)
             {
                 Console.WriteLine("Debe seleccionar una opcion correcta");
-                return false;   
+                Thread.Sleep(2000);               
+                return false;                 
             }
-            return true;
+            else
+            {
+                return true;
+            }
+            
         }
     }
 }

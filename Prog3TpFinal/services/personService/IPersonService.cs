@@ -8,5 +8,9 @@ namespace Prog3TpFinal.services.personService
         void savePerson (List<Person> people);
         
         List<Person> GetAllPersons();
+
+        Person GetPersonById(int id);
+
+        int PositionPerson(int document, List<Person> people);
     }
 }

@@ -1,13 +1,8 @@
 ﻿using Prog3TpFinal.models;
 using Prog3TpFinal.repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Prog3TpFinal.services.personService
-{  
+{
     internal class PersonService:IPersonService
     {
         private readonly IRepository _repository;
@@ -25,7 +20,41 @@ namespace Prog3TpFinal.services.personService
 
         public List<Person> GetAllPersons()
         {
-            return _repository.DeserializeList().ToList();  
+            return _repository.DeserializeList().ToList();          
+            
+        }      
+
+        public Person GetPersonById(int id)
+        {
+            var person = GetAllPersons();
+            if (person.Count > 0)
+            {
+                foreach (var people in person)
+                {
+                    if (people.Document == id)
+                    {                     
+                        return people;
+                    }
+                }
+            }           
+           
+            return null;                                                    
+           
         }
+
+        public int PositionPerson(int document,List<Person>persons)
+        {
+            if (GetPersonById(document) == null)
+            {
+                throw new Exception();
+            }
+            else
+            {
+                return persons.FindIndex(x => x.Document == document);
+            }
+            
+        }
+
+      
     }
 }
